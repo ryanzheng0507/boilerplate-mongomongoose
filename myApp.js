@@ -67,8 +67,15 @@ const createManyPeople = (arrayOfPeople, done) => {
   })
 };
 
+// In its simplest usage, Model.find() accepts a query document (a JSON object) as the first argument, then a callback. It returns an array of matches. It supports an extremely wide range of search options. Read more in the docs.
+// Modify the findPeopleByName function to find all the people having a given name, using Model.find() -> [Person]
+// Use the function argument personName as the search key.
+
 const findPeopleByName = (personName, done) => {
-  done(null /*, data*/);
+  Person.find({name: personName}, (err, data) => {
+    if (err) return console.error(err);
+    done(null, data)
+  })
 };
 
 const findOneByFood = (food, done) => {
