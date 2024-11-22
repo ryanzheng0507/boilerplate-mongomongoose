@@ -51,8 +51,20 @@ const createAndSavePerson = (done) => {
   })
 };
 
+// Sometimes you need to create many instances of your models, e.g. when seeding a database with initial data. Model.create() takes an array of objects like [{name: 'John', ...}, {...}, ...] as the first argument, and saves them all in the db.
+// Modify the createManyPeople function to create many people using Model.create() with the argument arrayOfPeople.
+
+let arrayOfPeople = [
+  {name: "John", age: 23, favoriteFoods: ["vegetables", "snakes", "steaks"]},
+  {name: "Joe", age: 33, favoriteFoods: ["vegetables", "mushroom", "steaks"]},
+  {name: "Jack", age: 43, favoriteFoods: ["eggs", "snakes", "steaks"]}
+]
+
 const createManyPeople = (arrayOfPeople, done) => {
-  done(null /*, data*/);
+  Person.create(arrayOfPeople, (err, data) => {
+    if (err) return console.error(err);
+    done(null, data)
+  })
 };
 
 const findPeopleByName = (personName, done) => {
